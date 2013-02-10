@@ -7,8 +7,20 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class StoreController < ApplicationController
+  skip_before_filter :authorize
+  
   def index
+	@visit_count = increment_counter
     @products = Product.order(:title)
     @cart = current_cart
   end
+
+  private 
+  	def increment_counter
+  		if session[:visit_count].nil?
+  			session[:visit_count] = 1
+  		else
+  			session[:visit_count] += 1
+  		end
+  	end
 end

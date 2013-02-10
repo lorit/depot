@@ -7,6 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 Depot::Application.routes.draw do
+
   get 'admin' => 'admin#index'
 
   controller :sessions do
@@ -15,11 +16,17 @@ Depot::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  resources :sessions
+
   resources :users
 
   resources :orders
 
-  resources :line_items
+  resources :line_items do
+    member do
+      put :decrement
+    end
+  end
 
   resources :carts
 

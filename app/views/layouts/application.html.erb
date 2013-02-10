@@ -15,6 +15,7 @@
   </div>
   <div id="columns">
     <div id="side">
+      Jesteś tu <%= @visit_count %> raz.
       <!-- START:hidden_div -->
       <% if @cart %>
         <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
@@ -30,6 +31,14 @@
         <li><a href="http://www..../contact">Contact</a></li>
       </ul>
     </div>
+<% if session[:user_id] %>
+  <ul>
+      <li><%= link_to 'Orders', orders_path %></li>
+      <li><%= link_to 'Orders', orders_path %></li>
+      <li><%= link_to 'Orders', orders_path %></li>
+      <li><%= button_to 'Logout', logout_path, method: :delete %>
+  </ul>
+<% end %>
     <div id="main">
       <%= yield %>
     </div>

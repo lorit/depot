@@ -41,5 +41,11 @@
 <!-- START_HIGHLIGHT -->
     <%= f.submit 'Place Order' %>
 <!-- END_HIGHLIGHT -->
+<div class="field">
+    <%= f.label :ship_order %><br />
+<!-- START_HIGHLIGHT -->
+    <%= f.date_select :ship_order %>
+<!-- END_HIGHLIGHT -->
+  </div>
   </div>
 <% end %>

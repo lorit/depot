@@ -7,7 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class LineItemsController < ApplicationController
-
+  skip_before_filter :authorize, only: :create
   # GET /line_items
   # GET /line_items.json
   def index
@@ -60,6 +60,7 @@ class LineItemsController < ApplicationController
         format.js   { @current_item = @line_item }
         format.json { render json: @line_item,
           status: :created, location: @line_item }
+           session[:visit_count] = 0
       else
         format.html { render action: "new" }
         format.json { render json: @line_item.errors,
@@ -94,5 +95,15 @@ class LineItemsController < ApplicationController
       format.html { redirect_to line_items_url }
       format.json { head :no_content }
     end
+  end
+
+  def decrement
+    @line_item = LineItem.find(params[:id])
+    @cart = @line_item.cart
+    respond_to do |format|
+      format.js {@current_item = @line_item}
+    end
+    @line_item = LineItem.find(params[:id])
+    @line_item.decrement_quantity
   end
 end

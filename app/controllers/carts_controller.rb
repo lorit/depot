@@ -7,7 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class CartsController < ApplicationController
-
+  skip_before_filter :authorize, only: [:create, :update, :destroy]
   # GET /carts
   # GET /carts.json
   def index
@@ -60,6 +60,7 @@ class CartsController < ApplicationController
       if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
         format.json { render json: @cart, status: :created, location: @cart }
+        session[:visit_count] = 0
       else
         format.html { render action: "new" }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
