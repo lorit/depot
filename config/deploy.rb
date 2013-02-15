@@ -1,8 +1,9 @@
 # config/deploy.rb
 require 'bundler/capistrano'
+
 # be sure to change these
 set :user, 'ozim'
-set :domain, 'depot.production'
+set :domain, 'depot.szkolenia.com'
 set :application, 'depot'
 
 # adjust if you are using RVM, remove if you are not
@@ -10,11 +11,13 @@ set :application, 'depot'
 require "rvm/capistrano"
 set :rvm_ruby_string, '1.9.3'
 set :rvm_type, :user
-set :ssh_options, {:forward_agent => true}
+set :ssh_options, {:forward_agent => true, :keys => "/home/ozim/.ssh/id_rsa"}
+set :ssh_options, { auth_methods: ['publickey','password'] }
+#ssh_options[:keys] = ["/home/ozim/.ssh/id_rsa"]
 
 # file paths
 set :repository,  "git@github.com:lorit/depot.git" 
-set :deploy_to, "/home/ozim/#{domain}" 
+set :deploy_to, "/home/#{user}/#{domain}" 
 
 # distribute your applications across servers (the 
 # instructions below put them
@@ -26,7 +29,7 @@ role :db, domain, :primary => true
 
 # config/deploy.rb
 # you might need to set this if you aren't seeing password prompts
-default_run_options[:pty] = true
+#default_run_options[:pty] = true
 
 set :deploy_via, :remote_cache
 set :scm, 'git'
