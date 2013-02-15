@@ -8,6 +8,6 @@
 #---
 class AddOrderIdToLineItem < ActiveRecord::Migration
   def change
-      add_column :ship_order, date
+      add_column :ship_order, :date
   end
 end
