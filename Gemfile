@@ -10,6 +10,8 @@ gem 'therubyracer'
 gem 'execjs'
 gem 'heroku'
 gem 'pg'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 
 # Gems used only for assets and not required

@@ -8,6 +8,14 @@
 #---
 Depot::Application.routes.draw do
 
+  get "upload" => "upload#get"
+
+  post "upload/save"
+
+  get "upload/picture"
+
+  get "upload/show"
+
   get 'admin' => 'admin#index'
 
   controller :sessions do
@@ -36,6 +44,7 @@ Depot::Application.routes.draw do
     get :who_bought, on: :member
   end
 
+  get "search" => "store#search"
   # ...
   # The priority is based upon order of creation:
   # first created -> highest priority.
